@@ -4,14 +4,14 @@
 Create a REST API that allows users to perform CRUD (Create, Read, Update, Delete) operations on a book.
 
 ### Requirements
-1. Use a web framework (e.g., Express for Node.js, Flask for Python).
+1. Use a web framework (Springboot framework).
 2. Implement the following endpoints:
    - `POST /books`: Create a new book.
    - `GET /books`: Retrieve a list of all books.
    - `GET /books/:id`: Retrieve a specific book by ID.
    - `PUT /books/:id`: Update a specific book by ID.
    - `DELETE /books/:id`: Delete a specific book by ID.
-3. Use a database to store book information (e.g., MongoDB, PostgreSQL).
+3. Use a database to store book information (MySql database).
 4. Validate input data to ensure data integrity.
 5. Handle errors gracefully and return appropriate HTTP status codes.
 
