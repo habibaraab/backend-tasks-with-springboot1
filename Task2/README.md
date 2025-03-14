@@ -1,56 +1,93 @@
-## Task 1: REST API for CRUD Operations on a Book
+
+## Task 2: REST API with Relations and Multiple CRUD Operations
 
 ### Objective
-Create a REST API that allows users to perform CRUD (Create, Read, Update, Delete) operations on a book.
+Create a REST API that manages authors and their books, demonstrating relations and multiple CRUD operations.
 
 ### Requirements
-1. Use a web framework (Springboot framework).
-2. Implement the following endpoints:
-   - `POST /books`: Create a new book.
-   - `GET /books`: Retrieve a list of all books.
-   - `GET /books/:id`: Retrieve a specific book by ID.
-   - `PUT /books/:id`: Update a specific book by ID.
-   - `DELETE /books/:id`: Delete a specific book by ID.
-3. Use a database to store book information (MySql database).
-4. Validate input data to ensure data integrity.
-5. Handle errors gracefully and return appropriate HTTP status codes.
+
+1. Implement the following endpoints:
+   - `POST /authors`: Create a new author.
+   - `GET /authors`: Retrieve a list of all authors.
+   - `GET /authors/:id`: Retrieve a specific author by ID.
+   - `PUT /authors/:id`: Update a specific author by ID.
+   - `DELETE /authors/:id`: Delete a specific author by ID.
+   - `POST /authors/:authorId/books`: Create a new book for a specific author.
+   - `GET /authors/:authorId/books`: Retrieve all books for a specific author.
+   - `GET /authors/:authorId/books/:bookId`: Retrieve a specific book by ID for a specific author.
+   - `PUT /authors/:authorId/books/:bookId`: Update a specific book by ID for a specific author.
+   - `DELETE /authors/:authorId/books/:bookId`: Delete a specific book by ID for a specific author.
+2. Use a database to store author and book information.
+3. Validate input data to ensure data integrity.
+4. Handle errors gracefully and return appropriate HTTP status codes.
 
 ### Example
 Here is an example of how the API endpoints should work:
 
-- **Create a new book**
+- **Create a new author**
   ```
-  POST /books
+  POST /authors
+  {
+    "name": "F. Scott Fitzgerald",
+    "birthdate": "1896-09-24"
+  }
+  ```
+
+- **Retrieve all authors**
+  ```
+  GET /authors
+  ```
+
+- **Retrieve a specific author by ID**
+  ```
+  GET /authors/1
+  ```
+
+- **Update a specific author by ID**
+  ```
+  PUT /authors/1
+  {
+    "name": "F. Scott Fitzgerald",
+    "birthdate": "1896-09-24"
+  }
+  ```
+
+- **Delete a specific author by ID**
+  ```
+  DELETE /authors/1
+  ```
+
+- **Create a new book for a specific author**
+  ```
+  POST /authors/1/books
   {
     "title": "The Great Gatsby",
-    "author": "F. Scott Fitzgerald",
     "publishedDate": "1925-04-10"
   }
   ```
 
-- **Retrieve all books**
+- **Retrieve all books for a specific author**
   ```
-  GET /books
-  ```
-
-- **Retrieve a specific book by ID**
-  ```
-  GET /books/1
+  GET /authors/1/books
   ```
 
-- **Update a specific book by ID**
+- **Retrieve a specific book by ID for a specific author**
   ```
-  PUT /books/1
+  GET /authors/1/books/1
+  ```
+
+- **Update a specific book by ID for a specific author**
+  ```
+  PUT /authors/1/books/1
   {
     "title": "The Great Gatsby",
-    "author": "F. Scott Fitzgerald",
     "publishedDate": "1925-04-10"
   }
   ```
 
-- **Delete a specific book by ID**
+- **Delete a specific book by ID for a specific author**
   ```
-  DELETE /books/1
+  DELETE /authors/1/books/1
   ```
 ## Technology and Tools I Used in this project:
 <li> IntellIJ IDE </li>
