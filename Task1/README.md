@@ -1,44 +1,24 @@
-## Task 3: Books Management System
+## Task 1: REST API for CRUD Operations on a Book
 
 ### Objective
-Create a books management system with user registration, login, and CRUD operations for books only for authenticated users.
+Create a REST API that allows users to perform CRUD (Create, Read, Update, Delete) operations on a book.
 
 ### Requirements
-1. Implement user authentication and authorization:
-   - `POST /register`: Register a new user.
-   - `POST /login`: Login a user and return a token.
-2. Implement the following book-related endpoints, accessible only to authenticated users:
+1. Use a web framework (e.g., Express for Node.js, Flask for Python).
+2. Implement the following endpoints:
    - `POST /books`: Create a new book.
    - `GET /books`: Retrieve a list of all books.
    - `GET /books/:id`: Retrieve a specific book by ID.
    - `PUT /books/:id`: Update a specific book by ID.
    - `DELETE /books/:id`: Delete a specific book by ID.
-3. Use a database to store user and book information (e.g., MongoDB, PostgreSQL).
+3. Use a database to store book information (e.g., MongoDB, PostgreSQL).
 4. Validate input data to ensure data integrity.
 5. Handle errors gracefully and return appropriate HTTP status codes.
 
 ### Example
 Here is an example of how the API endpoints should work:
 
-- **Register a new user**
-  ```
-  POST /register
-  {
-    "username": "user1",
-    "password": "password123"
-  }
-  ```
-
-- **Login a user**
-  ```
-  POST /login
-  {
-    "username": "user1",
-    "password": "password123"
-  }
-  ```
-
-- **Create a new book (authenticated)**
+- **Create a new book**
   ```
   POST /books
   {
@@ -48,17 +28,17 @@ Here is an example of how the API endpoints should work:
   }
   ```
 
-- **Retrieve all books (authenticated)**
+- **Retrieve all books**
   ```
   GET /books
   ```
 
-- **Retrieve a specific book by ID (authenticated)**
+- **Retrieve a specific book by ID**
   ```
   GET /books/1
   ```
 
-- **Update a specific book by ID (authenticated)**
+- **Update a specific book by ID**
   ```
   PUT /books/1
   {
@@ -68,14 +48,12 @@ Here is an example of how the API endpoints should work:
   }
   ```
 
-- **Delete a specific book by ID (authenticated)**
+- **Delete a specific book by ID**
   ```
   DELETE /books/1
   ```
-
 ## Technology and Tools I Used in this project:
 <li> IntellIJ IDE </li>
 <li> Spring Boot Web</li>
 <li> Spring Data JPA & Hibernate</li>
 <li> MySQL Database </li>
-<li> Spring Security </li>
