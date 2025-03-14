@@ -79,3 +79,5 @@ Here is an example of how the API endpoints should work:
 <li> Spring Data JPA & Hibernate</li>
 <li> MySQL Database </li>
 <li> Spring Security </li>
+<li> Spring Validation </li>
+
