@@ -56,4 +56,5 @@ Here is an example of how the API endpoints should work:
 <li> IntellIJ IDE </li>
 <li> Spring Boot Web</li>
 <li> Spring Data JPA & Hibernate</li>
+<li> Spring Validation</li>
 <li> MySQL Database </li>
