@@ -4,7 +4,7 @@
 Create a system to manage categories, products, and orders with order items.
 
 ### Requirements
-1. Use a web framework (e.g., Express for Node.js, Flask for Python).
+1. Use a web framework (springBoot).
 2. Implement the following endpoints for categories:
    - `POST /categories`: Create a new category.
    - `GET /categories`: Retrieve a list of all categories.
@@ -23,7 +23,7 @@ Create a system to manage categories, products, and orders with order items.
    - `GET /orders/:id`: Retrieve a specific order by ID.
    - `PUT /orders/:id`: Update a specific order by ID.
    - `DELETE /orders/:id`: Delete a specific order by ID.
-5. Use a database to store category, product, and order information (e.g., MongoDB, PostgreSQL).
+5. Use a database to store category, product, and order information (mySQL).
 6. Validate input data to ensure data integrity.
 7. Handle errors gracefully and return appropriate HTTP status codes.
 
