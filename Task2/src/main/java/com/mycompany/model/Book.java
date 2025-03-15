@@ -1,71 +1,72 @@
 package com.mycompany.model;
 
 
-
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
-import javax.validation.constraints.Positive;
-import java.math.BigDecimal;
 
 @Entity
-
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(nullable = false)
-    @NotBlank(message = "Title is required")
     private String title;
 
-    @Column(nullable = false)
-    @NotBlank(message = "Author is required")
-    private String author;
+    private String publishedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
 
 
-
-    @Column(nullable = false)
-    @Positive(message = "Price must be positive")
-    private BigDecimal price;
-
-    public Book(){}
-    public Book(int id, String title, String author, BigDecimal price) {
+    public Book(Long id, String title, String publishedDate, Author author) {
         this.id = id;
         this.title = title;
+        this.publishedDate = publishedDate;
         this.author = author;
-        this.price = price;
     }
 
-    public int getId() {
+
+
+
+
+
+    public Book(){}
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public @NotBlank(message = "Title is required") String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(@NotBlank(message = "Title is required") String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public @NotBlank(message = "Author is required") String getAuthor() {
+    public String getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(@NotBlank(message = "Author is required") String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
-    public @Positive(message = "Price must be positive") BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(@Positive(message = "Price must be positive") BigDecimal price) {
-        this.price = price;
+    @Override
+    public String toString() {
+        return "Book{id=" + id + ", title='" + title + '\'' + '}';
     }
 }

@@ -1,57 +1,60 @@
 package com.mycompany.Controller;
 
+import com.mycompany.Service.AuthorService;
 import com.mycompany.Service.BookService;
+import com.mycompany.model.Author;
 import com.mycompany.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/authors")
 public class homeController {
 
-    @Autowired
-    private BookService bookService;
+        @Autowired
+        private AuthorService authorService;
 
+        @Autowired
+        private BookService bookService;
 
-
-    @GetMapping
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
-    }
-
-    @GetMapping("/{id}")
-    public Optional<Book> getBookById(@PathVariable int id) {
-        return bookService.getBookById(id);
-
-    }
-
-    @PostMapping
-    public Book addBook(@RequestBody Book book) {
-        return bookService.addBook(book);
-    }
-
-    @PostMapping("/{id}")
-    public Book updateBook(@RequestBody Book book, @PathVariable int id) {
-        Optional<Book> b=bookService.getBookById(id);
-        if(b.isPresent()) {
-            book.setId(id);
+        @PostMapping
+        public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
+            return new ResponseEntity<>(authorService.CreateAuthor(author), HttpStatus.CREATED);
         }
-            return bookService.addBook(book);
+
+        @GetMapping
+        public List<Author> getAllAuthors() {
+            return authorService.GetAllAuthors();
+        }
+
+        @GetMapping("/{id}")
+        public ResponseEntity<Author> getAuthorById(@PathVariable int id) {
+            return authorService.GetAuthorById(id)
+                    .map(author -> new ResponseEntity<>(author, HttpStatus.OK))
+                    .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        }
+
+
+
+    @PutMapping("/{id}")
+    public Author updateBook(@RequestBody Author author, @PathVariable int id) {
+        Optional<Author> b=authorService.GetAuthorById(id);
+        if(b.isPresent()) {
+            author.setId(id);
+        }
+        return authorService.UpdateAuthor(author);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable int id) {
-        bookService.deleteBook(id);
-    }
-
-
-
-
-
-
+        @DeleteMapping("/{id}")
+        public ResponseEntity<Void> deleteAuthor(@PathVariable int id) {
+            authorService.DeleteAuthor(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
 
 
 }
