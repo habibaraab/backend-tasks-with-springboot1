@@ -1,6 +1,10 @@
 package com.mycompany.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -19,7 +23,8 @@ public class Category {
     @JoinColumn(name = "parent_category_id")
     private Category parentCategory;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Product> products = new ArrayList<>();
 
     // Constructors, getters, setters

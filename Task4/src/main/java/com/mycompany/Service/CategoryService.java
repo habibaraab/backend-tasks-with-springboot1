@@ -14,10 +14,7 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public Category createCategory(Category category) {
-        if (category.getParentCategory() != null) {
-            category.setParentCategory(categoryRepository.findById(category.getParentCategory().getId())
-                    .orElseThrow(() -> new RuntimeException("Parent category not found")));
-        }
+
         return categoryRepository.save(category);
     }
 

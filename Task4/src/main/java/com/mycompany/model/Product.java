@@ -1,5 +1,9 @@
 package com.mycompany.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
@@ -19,12 +23,8 @@ public class Product {
     private double price;
 
     @ManyToMany
-    @JoinTable(
-            name = "product_categories",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private List<Category> categories = new ArrayList<>();
+    @JoinColumn(name = "categories")
+    private List<Category> categories =new ArrayList<>();
 
     // Constructors, getters, setters
     public Product() {}
