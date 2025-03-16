@@ -1,5 +1,7 @@
 package com.mycompany.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class Author {
     private String birthdate;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Book> books = new ArrayList<>();
 
     public Author() {}
