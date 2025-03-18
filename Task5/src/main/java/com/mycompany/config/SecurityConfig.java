@@ -18,20 +18,19 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  {
-
-    @Autowired
-    private UserDetailsService userDetailsService;
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new CustomerDetails();
+        @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.
+                inMemoryAuthentication().withUser("Habiba").password(passwordEncoder().encode("12345")).roles("ADMIN")
+                .and().withUser("Ali").password(passwordEncoder().encode("1234")).roles("EDITOR")
+                .and().withUser("Ahmed").password(passwordEncoder().encode("123")).roles("VIEWER");
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(new AntPathRequestMatcher("/books", "GET")).permitAll()
@@ -45,6 +44,14 @@ public class SecurityConfig  {
                 .and()
                 .csrf().disable();
 
-        return http.build();
+
     }
+
+
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 }
