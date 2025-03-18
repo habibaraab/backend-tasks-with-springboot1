@@ -1,153 +1,169 @@
-## Task 4: Category, Product, and Order Management System
+## Task 5: Authorization Challenge
 
 ### Objective
-Create a system to manage categories, products, and orders with order items.
+Create a system that demonstrates different levels of authorization for users, including roles and permissions.
 
 ### Requirements
-1. Use a web framework (springBoot).
-2. Implement the following endpoints for categories:
-   - `POST /categories`: Create a new category.
-   - `GET /categories`: Retrieve a list of all categories.
-   - `GET /categories/:id`: Retrieve a specific category by ID.
-   - `PUT /categories/:id`: Update a specific category by ID.
-   - `DELETE /categories/:id`: Delete a specific category by ID.
-3. Implement the following endpoints for products:
-   - `POST /products`: Create a new product.
-   - `GET /products`: Retrieve a list of all products.
-   - `GET /products/:id`: Retrieve a specific product by ID.
-   - `PUT /products/:id`: Update a specific product by ID.
-   - `DELETE /products/:id`: Delete a specific product by ID.
-4. Implement the following endpoints for orders:
-   - `POST /orders`: Create a new order.
-   - `GET /orders`: Retrieve a list of all orders.
-   - `GET /orders/:id`: Retrieve a specific order by ID.
-   - `PUT /orders/:id`: Update a specific order by ID.
-   - `DELETE /orders/:id`: Delete a specific order by ID.
-5. Use a database to store category, product, and order information (mySQL).
-6. Validate input data to ensure data integrity.
-7. Handle errors gracefully and return appropriate HTTP status codes.
+1. Use a web framework (springBoot for java).
+2. Implement user roles and permissions:
+   - Roles: Admin, Editor, Viewer.
+   - Permissions: Create, Read, Update, Delete.
+3. Implement the following endpoints with role-based access control:
+   - `POST /books`: Create a new book (Admin, Editor).
+   - `GET /books`: Retrieve a list of all books (Admin, Editor, Viewer).
+   - `GET /books/:id`: Retrieve a specific book by ID (Admin, Editor, Viewer).
+   - `PUT /books/:id`: Update a specific book by ID (Admin, Editor).
+   - `DELETE /books/:id`: Delete a specific book by ID (Admin).
+4. Use a database to store user, role, and book information (e.g., MongoDB, PostgreSQL).
+5. Validate input data to ensure data integrity.
+6. Handle errors gracefully and return appropriate HTTP status codes.
 
 ### Example
 Here is an example of how the API endpoints should work:
 
-- **Create a new category**
+- **Create a new book (Admin, Editor)**
   ```
-  POST /categories
+  POST /books
   {
-    "name": "Fiction",
-    "parentCategoryId": null
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "publishedDate": "1925-04-10"
   }
   ```
 
-- **Retrieve all categories**
+- **Retrieve all books (Admin, Editor, Viewer)**
   ```
-  GET /categories
-  ```
-
-- **Retrieve a specific category by ID**
-  ```
-  GET /categories/1
+  GET /books
   ```
 
-- **Update a specific category by ID**
+- **Retrieve a specific book by ID (Admin, Editor, Viewer)**
   ```
-  PUT /categories/1
+  GET /books/1
+  ```
+
+- **Update a specific book by ID (Admin, Editor)**
+  ```
+  PUT /books/1
   {
-    "name": "Classic Fiction",
-    "parentCategoryId": null
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "publishedDate": "1925-04-10"
   }
   ```
 
-- **Delete a specific category by ID**
+- **Delete a specific book by ID (Admin)**
   ```
-  DELETE /categories/1
+  DELETE /books/1
   ```
 
-- **Create a new product**
+### Authorization Logic
+- **Admin**: Can create, read, update, and delete any book.
+- **Editor**: Can create, read, and update any book.
+- **Viewer**: Can only read books.
+
+### Test Cases
+
+#### Test Case 1: Admin Role
+- **Create a new book**
   ```
-  POST /products
+  POST /books
   {
-    "name": "The Great Gatsby",
-    "price": 10.99,
-    "categories": [1, 2]
+    "title": "1984",
+    "author": "George Orwell",
+    "publishedDate": "1949-06-08"
   }
   ```
+  - Expected: 201 Created
 
-- **Retrieve all products**
+- **Retrieve all books**
   ```
-  GET /products
+  GET /books
   ```
+  - Expected: 200 OK
 
-- **Retrieve a specific product by ID**
+- **Update a book**
   ```
-  GET /products/1
-  ```
-
-- **Update a specific product by ID**
-  ```
-  PUT /products/1
+  PUT /books/1
   {
-    "name": "The Great Gatsby",
-    "price": 12.99,
-    "categories": [1, 2]
+    "title": "1984",
+    "author": "George Orwell",
+    "publishedDate": "1949-06-08"
   }
   ```
+  - Expected: 200 OK
 
-- **Delete a specific product by ID**
+- **Delete a book**
   ```
-  DELETE /products/1
+  DELETE /books/1
   ```
+  - Expected: 204 No Content
 
-- **Create a new order**
+#### Test Case 2: Editor Role
+- **Create a new book**
   ```
-  POST /orders
+  POST /books
   {
-    "userId": 1,
-    "items": [
-      {
-        "productId": 1,
-        "quantity": 2
-      },
-      {
-        "productId": 2,
-        "quantity": 1
-      }
-    ]
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "publishedDate": "1960-07-11"
   }
   ```
+  - Expected: 201 Created
 
-- **Retrieve all orders**
+- **Retrieve all books**
   ```
-  GET /orders
+  GET /books
   ```
+  - Expected: 200 OK
 
-- **Retrieve a specific order by ID**
+- **Update a book**
   ```
-  GET /orders/1
-  ```
-
-- **Update a specific order by ID**
-  ```
-  PUT /orders/1
+  PUT /books/1
   {
-    "userId": 1,
-    "items": [
-      {
-        "productId": 1,
-        "quantity": 3
-      }
-    ]
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "publishedDate": "1960-07-11"
   }
   ```
+  - Expected: 200 OK
 
-- **Delete a specific order by ID**
+- **Delete a book**
   ```
-  DELETE /orders/1
+  DELETE /books/1
   ```
+  - Expected: 403 Forbidden
 
-## Technology and Tools I Used in this project:
-<li> IntellIJ IDE </li>
-<li> Spring Boot Web</li>
-<li> Spring Data JPA & Hibernate</li>
-<li> Spring Validation</li>
-<li> MySQL Database </li>
+#### Test Case 3: Viewer Role
+- **Create a new book**
+  ```
+  POST /books
+  {
+    "title": "Brave New World",
+    "author": "Aldous Huxley",
+    "publishedDate": "1932-08-01"
+  }
+  ```
+  - Expected: 403 Forbidden
+
+- **Retrieve all books**
+  ```
+  GET /books
+  ```
+  - Expected: 200 OK
+
+- **Update a book**
+  ```
+  PUT /books/1
+  {
+    "title": "Brave New World",
+    "author": "Aldous Huxley",
+    "publishedDate": "1932-08-01"
+  }
+  ```
+  - Expected: 403 Forbidden
+
+- **Delete a book**
+  ```
+  DELETE /books/1
+  ```
+  - Expected: 403 Forbidden
