@@ -14,7 +14,7 @@ Create a system that demonstrates different levels of authorization for users, i
    - `GET /books/:id`: Retrieve a specific book by ID (Admin, Editor, Viewer).
    - `PUT /books/:id`: Update a specific book by ID (Admin, Editor).
    - `DELETE /books/:id`: Delete a specific book by ID (Admin).
-4. Use a database to store user, role, and book information (e.g., MongoDB, PostgreSQL).
+4. Use a database to store user, role, and book information (mySQL).
 5. Validate input data to ensure data integrity.
 6. Handle errors gracefully and return appropriate HTTP status codes.
 
